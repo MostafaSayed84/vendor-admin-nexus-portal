@@ -5,8 +5,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Plus, Search, Eye, Calendar, Package, DollarSign } from 'lucide-react';
+import { Plus, Search, Eye, Calendar, Package, DollarSign, LayoutGrid, List, Edit, Truck } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useLanguage } from '@/components/LanguageContext';
+import { cn } from '@/lib/utils';
+
+type ViewMode = 'table' | 'cards';
 
 const mockPurchaseOrders = [
   {
@@ -64,6 +69,9 @@ const mockPurchaseOrders = [
 ];
 
 export default function PurchaseOrders() {
+  const { t } = useTranslation();
+  const { isRTL } = useLanguage();
+  const [viewMode, setViewMode] = useState<ViewMode>('table');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('All Status');
   const [selectedVendor, setSelectedVendor] = useState('All Vendors');
@@ -95,6 +103,10 @@ export default function PurchaseOrders() {
     }
   };
 
+  const getStatusTranslation = (status: string) => {
+    return t(status.toLowerCase());
+  };
+
   const totalValue = filteredOrders.reduce((sum, order) => sum + order.totalAmount, 0);
   const totalOrders = filteredOrders.length;
 
@@ -102,15 +114,15 @@ export default function PurchaseOrders() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Purchase Orders</h1>
+          <h1 className="text-3xl font-bold text-foreground">{t('purchaseOrders')}</h1>
           <p className="text-muted-foreground">
-            Manage and track purchase orders across vendors
+            {t('managePurchaseOrders')}
           </p>
         </div>
         <Button asChild>
           <Link to="/admin/purchase-orders/create">
-            <Plus className="h-4 w-4 mr-2" />
-            Create Order
+            <Plus className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
+            {t('createOrder')}
           </Link>
         </Button>
       </div>
@@ -121,7 +133,7 @@ export default function PurchaseOrders() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Total Orders</p>
+                <p className="text-sm text-muted-foreground">{t('totalOrders')}</p>
                 <p className="text-2xl font-bold text-foreground">{totalOrders}</p>
               </div>
               <Package className="h-8 w-8 text-primary" />
@@ -132,8 +144,10 @@ export default function PurchaseOrders() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Total Value</p>
-                <p className="text-2xl font-bold text-foreground">ر.س{(totalValue * 3.75).toLocaleString()}</p>
+                <p className="text-sm text-muted-foreground">{t('totalAmount')}</p>
+                <p className="text-2xl font-bold text-foreground">
+                  {isRTL ? `${(totalValue * 3.75).toLocaleString()} ر.س` : `SAR ${(totalValue * 3.75).toLocaleString()}`}
+                </p>
               </div>
               <DollarSign className="h-8 w-8 text-success" />
             </div>
@@ -143,7 +157,7 @@ export default function PurchaseOrders() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Pending</p>
+                <p className="text-sm text-muted-foreground">{t('pending')}</p>
                 <p className="text-2xl font-bold text-foreground">
                   {filteredOrders.filter(o => o.status === 'Pending').length}
                 </p>
@@ -156,7 +170,7 @@ export default function PurchaseOrders() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">Delivered</p>
+                <p className="text-sm text-muted-foreground">{t('delivered')}</p>
                 <p className="text-2xl font-bold text-foreground">
                   {filteredOrders.filter(o => o.status === 'Delivered').length}
                 </p>
@@ -167,107 +181,191 @@ export default function PurchaseOrders() {
         </Card>
       </div>
 
-      {/* Filters */}
-      <Card>
-        <CardContent className="p-4">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder="Search orders..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-            <Select value={selectedVendor} onValueChange={setSelectedVendor}>
-              <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="Vendor" />
-              </SelectTrigger>
-              <SelectContent>
-                {vendors.map(vendor => (
-                  <SelectItem key={vendor} value={vendor}>
-                    {vendor}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-              <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                {statuses.map(status => (
-                  <SelectItem key={status} value={status}>
-                    {status}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+      {/* Controls */}
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center flex-1">
+          <div className="relative flex-1 max-w-sm">
+            <Search className={cn("absolute top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground", isRTL ? "right-3" : "left-3")} />
+            <Input
+              placeholder={t('search')}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={cn(isRTL ? "pr-10" : "pl-10")}
+            />
           </div>
-        </CardContent>
-      </Card>
-
-      {/* Orders Table */}
-      <Card>
-        <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Order ID</TableHead>
-                <TableHead>Vendor</TableHead>
-                <TableHead>Order Date</TableHead>
-                <TableHead>Expected Delivery</TableHead>
-                <TableHead>Items</TableHead>
-                <TableHead>Total Amount</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredOrders.map((order) => (
-                <TableRow key={order.id}>
-                  <TableCell>
-                    <span className="font-medium text-foreground">{order.id}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-foreground">{order.vendor}</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-muted-foreground">
-                      {new Date(order.orderDate).toLocaleDateString()}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-muted-foreground">
-                      {new Date(order.expectedDelivery).toLocaleDateString()}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="text-foreground">{order.itemCount} items</span>
-                  </TableCell>
-                   <TableCell>
-                     <span className="font-medium text-foreground">
-                       ر.س{(order.totalAmount * 3.75).toLocaleString()}
-                     </span>
-                   </TableCell>
-                  <TableCell>
-                    <Badge className={getStatusColor(order.status)}>
-                      {order.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="outline" size="sm">
-                      <Eye className="h-4 w-4 mr-2" />
-                      View
-                    </Button>
-                  </TableCell>
-                </TableRow>
+          <Select value={selectedVendor} onValueChange={setSelectedVendor}>
+            <SelectTrigger className="w-full sm:w-48">
+              <SelectValue placeholder={t('vendors')} />
+            </SelectTrigger>
+            <SelectContent>
+              {vendors.map(vendor => (
+                <SelectItem key={vendor} value={vendor}>
+                  {vendor}
+                </SelectItem>
               ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+            </SelectContent>
+          </Select>
+          <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+            <SelectTrigger className="w-full sm:w-48">
+              <SelectValue placeholder={t('status')} />
+            </SelectTrigger>
+            <SelectContent>
+              {statuses.map(status => (
+                <SelectItem key={status} value={status}>
+                  {status === 'All Status' ? t('status') : getStatusTranslation(status)}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex items-center gap-2">
+          <Button
+            variant={viewMode === 'table' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setViewMode('table')}
+          >
+            <List className="h-4 w-4" />
+            <span className={cn("hidden sm:inline", isRTL ? "mr-2" : "ml-2")}>{t('tableView')}</span>
+          </Button>
+          <Button
+            variant={viewMode === 'cards' ? 'default' : 'outline'}
+            size="sm"
+            onClick={() => setViewMode('cards')}
+          >
+            <LayoutGrid className="h-4 w-4" />
+            <span className={cn("hidden sm:inline", isRTL ? "mr-2" : "ml-2")}>{t('cardView')}</span>
+          </Button>
+        </div>
+      </div>
+
+      {/* Table View */}
+      {viewMode === 'table' && (
+        <Card>
+          <CardContent className="p-0">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>{t('orderId')}</TableHead>
+                  <TableHead>{t('vendors')}</TableHead>
+                  <TableHead>{t('orderDate')}</TableHead>
+                  <TableHead>{t('expectedDelivery')}</TableHead>
+                  <TableHead>{t('items')}</TableHead>
+                  <TableHead>{t('totalAmount')}</TableHead>
+                  <TableHead>{t('status')}</TableHead>
+                  <TableHead>{t('actions')}</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredOrders.map((order) => (
+                  <TableRow key={order.id}>
+                    <TableCell>
+                      <span className="font-medium text-foreground">{order.id}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-foreground">{order.vendor}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-muted-foreground">
+                        {new Date(order.orderDate).toLocaleDateString()}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-muted-foreground">
+                        {new Date(order.expectedDelivery).toLocaleDateString()}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="text-foreground">{order.itemCount} {t('items')}</span>
+                    </TableCell>
+                     <TableCell>
+                       <span className="font-medium text-foreground">
+                         {isRTL ? `${(order.totalAmount * 3.75).toLocaleString()} ر.س` : `SAR ${(order.totalAmount * 3.75).toLocaleString()}`}
+                       </span>
+                     </TableCell>
+                    <TableCell>
+                      <Badge className={getStatusColor(order.status)}>
+                        {getStatusTranslation(order.status)}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">
+                          <Eye className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
+                          {t('view')}
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Edit className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
+                          {t('edit')}
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Card View */}
+      {viewMode === 'cards' && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredOrders.map((order) => (
+            <Card key={order.id} className="hover:shadow-elegant transition-shadow">
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="font-semibold text-foreground">{order.id}</h3>
+                      <p className="text-sm text-muted-foreground">{order.vendor}</p>
+                    </div>
+                    <Badge className={getStatusColor(order.status)}>
+                      {getStatusTranslation(order.status)}
+                    </Badge>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">{t('orderDate')}:</span>
+                      <span className="text-foreground">
+                        {new Date(order.orderDate).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">{t('expectedDelivery')}:</span>
+                      <span className="text-foreground">
+                        {new Date(order.expectedDelivery).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">{t('items')}:</span>
+                      <span className="text-foreground">{order.itemCount}</span>
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-border">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-lg font-semibold text-foreground">
+                        {isRTL ? `${(order.totalAmount * 3.75).toLocaleString()} ر.س` : `SAR ${(order.totalAmount * 3.75).toLocaleString()}`}
+                      </span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <Eye className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
+                        {t('view')}
+                      </Button>
+                      <Button variant="outline" size="sm" className="flex-1">
+                        <Edit className={cn("h-4 w-4", isRTL ? "ml-2" : "mr-2")} />
+                        {t('edit')}
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
