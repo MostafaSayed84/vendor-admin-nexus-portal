@@ -8,115 +8,113 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Light mode - EXACT colors from your reference image */
-    --background: 255 255 255;  /* Pure white */
-    --foreground: 0 0 0;        /* Pure black text */
+    /* EXACT Professional Blue/Slate color scheme from your images */
+    --background: 255 255 255;
+    --foreground: 51 65 85;     /* Slate text */
 
-    --card: 255 255 255;        /* Pure white cards */
-    --card-foreground: 0 0 0;
+    --card: 255 255 255;
+    --card-foreground: 51 65 85;
 
     --popover: 255 255 255;
-    --popover-foreground: 0 0 0;
+    --popover-foreground: 51 65 85;
 
-    /* EXACT BLUE from your image - #6366F1 */
-    --primary: 99 102 241;      /* This is the EXACT blue from your login image */
+    /* Professional slate-blue from your dashboard image */
+    --primary: 79 70 229;       /* Indigo-600 - professional slate-blue */
     --primary-foreground: 255 255 255;
-    --primary-glow: 129 140 248;
+    --primary-glow: 99 102 241;
 
-    --secondary: 248 250 252;   /* Very light gray */
-    --secondary-foreground: 71 85 105;
+    --secondary: 248 250 252;   /* Slate-50 */
+    --secondary-foreground: 100 116 139;
 
-    --muted: 248 250 252;
+    --muted: 241 245 249;       /* Slate-100 */
     --muted-foreground: 100 116 139;
 
-    --accent: 248 250 252;      /* Light gray for cards */
+    --accent: 248 250 252;      /* Slate-50 */
     --accent-foreground: 71 85 105;
 
-    --destructive: 239 68 68;
+    --destructive: 220 38 38;
     --destructive-foreground: 255 255 255;
 
-    --border: 229 231 235;      /* Light border */
-    --input: 229 231 235;
-    --ring: 99 102 241;         /* Same blue as primary */
+    --border: 226 232 240;      /* Slate-200 */
+    --input: 226 232 240;
+    --ring: 79 70 229;
 
-    --success: 34 197 94;
+    --success: 22 163 74;
     --success-foreground: 255 255 255;
     
     --warning: 245 158 11;
     --warning-foreground: 255 255 255;
 
-    /* Gradients using EXACT blue */
-    --gradient-primary: linear-gradient(135deg, hsl(99 102 241), hsl(129 140 248));
+    /* Professional gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(79 70 229), hsl(99 102 241));
     --gradient-subtle: linear-gradient(180deg, hsl(255 255 255), hsl(248 250 252));
     --gradient-sidebar: linear-gradient(135deg, hsl(51 65 85), hsl(71 85 105));
     --gradient-card: linear-gradient(135deg, hsl(255 255 255), hsl(248 250 252));
     
-    /* Shadows using the EXACT blue */
-    --shadow-elegant: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.05), 0 1px 3px rgba(99, 102, 241, 0.1);
+    /* Subtle professional shadows */
+    --shadow-elegant: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-glow: 0 0 0 1px rgba(79, 70, 229, 0.05);
     --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 0.5rem;
 
-    --radius: 0.75rem;  /* More rounded corners */
-
-    /* Sidebar colors - Dark sidebar with EXACT blue accents */
-    --sidebar-background: 51 65 85;     /* Dark gray sidebar */
-    --sidebar-foreground: 255 255 255;  /* White text */
-    --sidebar-primary: 99 102 241;      /* EXACT blue for active items */
+    /* Sidebar - Dark slate matching your dashboard */
+    --sidebar-background: 51 65 85;     /* Slate-700 */
+    --sidebar-foreground: 248 250 252;  /* Slate-50 */
+    --sidebar-primary: 79 70 229;       /* Same professional blue */
     --sidebar-primary-foreground: 255 255 255;
-    --sidebar-accent: 71 85 105;        /* Darker accent */
+    --sidebar-accent: 71 85 105;        /* Slate-600 */
     --sidebar-accent-foreground: 203 213 225;
     --sidebar-border: 71 85 105;
-    --sidebar-ring: 99 102 241;
+    --sidebar-ring: 79 70 229;
   }
 
   .dark {
-    /* Dark mode */
-    --background: 15 23 42;
-    --foreground: 248 250 252;
+    /* Dark mode with professional slate */
+    --background: 15 23 42;     /* Slate-900 */
+    --foreground: 248 250 252;  /* Slate-50 */
 
-    --card: 30 41 59;
+    --card: 30 41 59;          /* Slate-800 */
     --card-foreground: 248 250 252;
 
     --popover: 30 41 59;
     --popover-foreground: 248 250 252;
 
-    --primary: 99 102 241;      /* Same EXACT blue in dark mode */
+    --primary: 79 70 229;      /* Same professional slate-blue */
     --primary-foreground: 255 255 255;
-    --primary-glow: 129 140 248;
+    --primary-glow: 99 102 241;
 
-    --secondary: 51 65 85;
+    --secondary: 51 65 85;     /* Slate-700 */
     --secondary-foreground: 226 232 240;
 
     --muted: 51 65 85;
     --muted-foreground: 148 163 184;
 
-    --accent: 71 85 105;
+    --accent: 71 85 105;       /* Slate-600 */
     --accent-foreground: 226 232 240;
 
     --destructive: 248 113 113;
-    --destructive-foreground: 248 250 252;
+    --destructive-foreground: 255 255 255;
 
-    --border: 71 85 105;
+    --border: 71 85 105;       /* Slate-600 */
     --input: 71 85 105;
-    --ring: 99 102 241;
+    --ring: 79 70 229;
 
-    /* Success and Warning */
-    --success: 74 222 128;
+    --success: 34 197 94;
     --success-foreground: 255 255 255;
-    --warning: 251 191 36;
+    --warning: 245 158 11;
     --warning-foreground: 255 255 255;
 
-    /* Sidebar colors */
+    /* Dark sidebar */
     --sidebar-background: 51 65 85;
-    --sidebar-foreground: 255 255 255;
-    --sidebar-primary: 99 102 241;
+    --sidebar-foreground: 248 250 252;
+    --sidebar-primary: 79 70 229;
     --sidebar-primary-foreground: 255 255 255;
     --sidebar-accent: 71 85 105;
     --sidebar-accent-foreground: 203 213 225;
     --sidebar-border: 71 85 105;
-    --sidebar-ring: 99 102 241;
+    --sidebar-ring: 79 70 229;
   }
 }
 
