@@ -206,7 +206,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'ar', // Default to Arabic
+    lng: 'en', // Default to English
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false

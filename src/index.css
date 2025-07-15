@@ -18,25 +18,25 @@ All colors MUST be HSL.
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
 
-    --primary: 14 165 233;
+    --primary: 59 130 246;
     --primary-foreground: 248 250 252;
-    --primary-glow: 125 211 252;
+    --primary-glow: 147 197 253;
 
-    --secondary: 241 245 249;
-    --secondary-foreground: 30 41 59;
+    --secondary: 248 250 252;
+    --secondary-foreground: 51 65 85;
 
     --muted: 241 245 249;
     --muted-foreground: 100 116 139;
 
-    --accent: 229 231 235;
-    --accent-foreground: 30 41 59;
+    --accent: 241 245 249;
+    --accent-foreground: 51 65 85;
 
     --destructive: 239 68 68;
     --destructive-foreground: 248 250 252;
 
     --border: 226 232 240;
     --input: 226 232 240;
-    --ring: 14 165 233;
+    --ring: 59 130 246;
 
     --success: 34 197 94;
     --success-foreground: 240 253 244;
@@ -45,13 +45,15 @@ All colors MUST be HSL.
     --warning-foreground: 255 251 235;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(14 165 233), hsl(125 211 252));
+    --gradient-primary: linear-gradient(135deg, hsl(59 130 246), hsl(147 197 253));
     --gradient-subtle: linear-gradient(180deg, hsl(248 250 252), hsl(241 245 249));
-    --gradient-sidebar: linear-gradient(135deg, hsl(2 6 23), hsl(15 23 42));
+    --gradient-sidebar: linear-gradient(135deg, hsl(15 23 42), hsl(30 41 59));
+    --gradient-card: linear-gradient(135deg, hsl(255 255 255), hsl(248 250 252));
     
     /* Shadows */
-    --shadow-elegant: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-glow: 0 0 20px hsl(14 165 233 / 0.15);
+    --shadow-elegant: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+    --shadow-glow: 0 0 20px hsl(59 130 246 / 0.25);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -60,12 +62,12 @@ All colors MUST be HSL.
     /* Sidebar colors - Modern dark blue */
     --sidebar-background: 2 6 23;
     --sidebar-foreground: 241 245 249;
-    --sidebar-primary: 14 165 233;
+    --sidebar-primary: 59 130 246;
     --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 15 23 42;
+    --sidebar-accent: 30 41 59;
     --sidebar-accent-foreground: 226 232 240;
-    --sidebar-border: 30 41 59;
-    --sidebar-ring: 14 165 233;
+    --sidebar-border: 51 65 85;
+    --sidebar-ring: 59 130 246;
   }
 
   .dark {
@@ -79,9 +81,9 @@ All colors MUST be HSL.
     --popover: 30 41 59;
     --popover-foreground: 248 250 252;
 
-    --primary: 14 165 233;
+    --primary: 59 130 246;
     --primary-foreground: 248 250 252;
-    --primary-glow: 125 211 252;
+    --primary-glow: 147 197 253;
 
     --secondary: 51 65 85;
     --secondary-foreground: 226 232 240;
@@ -97,7 +99,7 @@ All colors MUST be HSL.
 
     --border: 71 85 105;
     --input: 71 85 105;
-    --ring: 14 165 233;
+    --ring: 59 130 246;
 
     /* Success and Warning */
     --success: 74 222 128;
@@ -108,12 +110,12 @@ All colors MUST be HSL.
     /* Sidebar colors */
     --sidebar-background: 2 6 23;
     --sidebar-foreground: 241 245 249;
-    --sidebar-primary: 14 165 233;
+    --sidebar-primary: 59 130 246;
     --sidebar-primary-foreground: 248 250 252;
-    --sidebar-accent: 15 23 42;
+    --sidebar-accent: 30 41 59;
     --sidebar-accent-foreground: 203 213 225;
-    --sidebar-border: 30 41 59;
-    --sidebar-ring: 14 165 233;
+    --sidebar-border: 51 65 85;
+    --sidebar-ring: 59 130 246;
   }
 }
 
@@ -123,7 +125,28 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+
+  /* Enhanced animations and transitions */
+  .animate-fade-in {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  .hover-shadow-card {
+    transition: box-shadow 0.3s ease-out;
+  }
+
+  .hover-shadow-card:hover {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
   }
 
   /* RTL Support */
@@ -131,8 +154,16 @@ All colors MUST be HSL.
     direction: rtl;
   }
 
-  [dir="rtl"] .flex {
+  [dir="rtl"] .flex-row {
     flex-direction: row-reverse;
+  }
+
+  [dir="rtl"] .justify-start {
+    justify-content: flex-end;
+  }
+
+  [dir="rtl"] .justify-end {
+    justify-content: flex-start;
   }
 
   [dir="rtl"] .space-x-3 > * + * {
