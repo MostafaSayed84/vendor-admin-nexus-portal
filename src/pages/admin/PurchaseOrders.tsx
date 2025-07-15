@@ -133,7 +133,7 @@ export default function PurchaseOrders() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Value</p>
-                <p className="text-2xl font-bold text-foreground">${totalValue.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-foreground">ر.س{(totalValue * 3.75).toLocaleString()}</p>
               </div>
               <DollarSign className="h-8 w-8 text-success" />
             </div>
@@ -246,11 +246,11 @@ export default function PurchaseOrders() {
                   <TableCell>
                     <span className="text-foreground">{order.itemCount} items</span>
                   </TableCell>
-                  <TableCell>
-                    <span className="font-medium text-foreground">
-                      ${order.totalAmount.toLocaleString()}
-                    </span>
-                  </TableCell>
+                   <TableCell>
+                     <span className="font-medium text-foreground">
+                       ر.س{(order.totalAmount * 3.75).toLocaleString()}
+                     </span>
+                   </TableCell>
                   <TableCell>
                     <Badge className={getStatusColor(order.status)}>
                       {order.status}

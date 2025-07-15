@@ -15,12 +15,12 @@ const mockVendorOrders = [
     orderDate: '2024-07-10',
     expectedDelivery: '2024-07-20',
     status: 'Pending',
-    totalAmount: 2450.00,
+    totalAmount: 9187.50,
     itemCount: 15,
     priority: 'High',
     items: [
-      { name: 'Wireless Bluetooth Headphones', quantity: 10, price: 89.99, total: 899.90 },
-      { name: 'Mechanical Gaming Keyboard', quantity: 5, price: 149.99, total: 749.95 }
+      { name: 'Wireless Bluetooth Headphones', quantity: 10, price: 337.46, total: 3374.60 },
+      { name: 'Mechanical Gaming Keyboard', quantity: 5, price: 562.46, total: 2812.30 }
     ],
     notes: 'Urgent order for upcoming promotion. Please expedite shipping.'
   },
@@ -29,12 +29,12 @@ const mockVendorOrders = [
     orderDate: '2024-07-12',
     expectedDelivery: '2024-07-22',
     status: 'Processing',
-    totalAmount: 890.50,
+    totalAmount: 3339.38,
     itemCount: 8,
     priority: 'Medium',
     items: [
-      { name: 'Stainless Steel Water Bottle', quantity: 20, price: 24.99, total: 499.80 },
-      { name: 'Wireless Bluetooth Headphones', quantity: 5, price: 94.99, total: 474.95 }
+      { name: 'Stainless Steel Water Bottle', quantity: 20, price: 93.71, total: 1874.20 },
+      { name: 'Wireless Bluetooth Headphones', quantity: 5, price: 356.21, total: 1781.05 }
     ],
     notes: 'Standard delivery is fine for this order.'
   },
@@ -43,12 +43,12 @@ const mockVendorOrders = [
     orderDate: '2024-07-08',
     expectedDelivery: '2024-07-15',
     status: 'Shipped',
-    totalAmount: 3200.75,
+    totalAmount: 12002.81,
     itemCount: 12,
     priority: 'Low',
     items: [
-      { name: 'Ergonomic Office Chair', quantity: 10, price: 299.99, total: 2999.90 },
-      { name: 'Mechanical Gaming Keyboard', quantity: 2, price: 159.99, total: 319.98 }
+      { name: 'Ergonomic Office Chair', quantity: 10, price: 1124.96, total: 11249.60 },
+      { name: 'Mechanical Gaming Keyboard', quantity: 2, price: 599.96, total: 1199.92 }
     ],
     notes: 'Customer requested specific delivery instructions.'
   },
@@ -57,12 +57,12 @@ const mockVendorOrders = [
     orderDate: '2024-07-14',
     expectedDelivery: '2024-07-25',
     status: 'Pending',
-    totalAmount: 1750.00,
+    totalAmount: 6562.50,
     itemCount: 25,
     priority: 'High',
     items: [
-      { name: 'Organic Cotton T-Shirt', quantity: 50, price: 29.99, total: 1499.50 },
-      { name: 'Ergonomic Office Chair', quantity: 2, price: 279.99, total: 559.98 }
+      { name: 'Organic Cotton T-Shirt', quantity: 50, price: 112.46, total: 5623.00 },
+      { name: 'Ergonomic Office Chair', quantity: 2, price: 1049.96, total: 2099.92 }
     ],
     notes: 'Large order - please confirm availability before processing.'
   }
@@ -152,7 +152,7 @@ export default function VendorOrders() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground">Total Value</p>
-                <p className="text-2xl font-bold text-foreground">${totalValue.toLocaleString()}</p>
+                <p className="text-2xl font-bold text-foreground">ر.س{(totalValue * 3.75).toLocaleString()}</p>
               </div>
               <DollarSign className="h-8 w-8 text-success" />
             </div>
@@ -248,11 +248,11 @@ export default function VendorOrders() {
                   <TableCell>
                     <span className="text-foreground">{order.itemCount} items</span>
                   </TableCell>
-                  <TableCell>
-                    <span className="font-medium text-foreground">
-                      ${order.totalAmount.toLocaleString()}
-                    </span>
-                  </TableCell>
+                   <TableCell>
+                     <span className="font-medium text-foreground">
+                       ر.س{(order.totalAmount * 3.75).toLocaleString()}
+                     </span>
+                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className={getPriorityColor(order.priority)}>
                       {order.priority}
@@ -327,8 +327,8 @@ export default function VendorOrders() {
                                       <TableRow key={index}>
                                         <TableCell>{item.name}</TableCell>
                                         <TableCell>{item.quantity}</TableCell>
-                                        <TableCell>${item.price.toFixed(2)}</TableCell>
-                                        <TableCell>${item.total.toFixed(2)}</TableCell>
+                                         <TableCell>ر.س{item.price.toFixed(2)}</TableCell>
+                                         <TableCell>ر.س{item.total.toFixed(2)}</TableCell>
                                       </TableRow>
                                     ))}
                                   </TableBody>
@@ -336,9 +336,9 @@ export default function VendorOrders() {
                               </div>
                               <div className="flex justify-end mt-4">
                                 <div className="text-right">
-                                  <p className="text-lg font-bold">
-                                    Total: ${selectedOrder.totalAmount.toFixed(2)}
-                                  </p>
+                                   <p className="text-lg font-bold">
+                                     Total: ر.س{selectedOrder.totalAmount.toFixed(2)}
+                                   </p>
                                 </div>
                               </div>
                             </div>

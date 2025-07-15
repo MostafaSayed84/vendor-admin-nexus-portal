@@ -10,6 +10,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import VendorList from "./pages/admin/VendorList";
 import CreateVendor from "./pages/admin/CreateVendor";
 import ProductList from "./pages/admin/ProductList";
+import CreateProduct from "./pages/admin/CreateProduct";
 import PurchaseOrders from "./pages/admin/PurchaseOrders";
 import CreatePurchaseOrder from "./pages/admin/CreatePurchaseOrder";
 import VendorDashboard from "./pages/vendor/VendorDashboard";
@@ -53,6 +54,7 @@ function AppRoutes() {
       <Route path="/admin/vendors" element={<ProtectedRoute allowedRole="admin"><VendorList /></ProtectedRoute>} />
       <Route path="/admin/vendors/create" element={<ProtectedRoute allowedRole="admin"><CreateVendor /></ProtectedRoute>} />
       <Route path="/admin/products" element={<ProtectedRoute allowedRole="admin"><ProductList /></ProtectedRoute>} />
+      <Route path="/admin/products/create" element={<ProtectedRoute allowedRole="admin"><CreateProduct /></ProtectedRoute>} />
       <Route path="/admin/purchase-orders" element={<ProtectedRoute allowedRole="admin"><PurchaseOrders /></ProtectedRoute>} />
       <Route path="/admin/purchase-orders/create" element={<ProtectedRoute allowedRole="admin"><CreatePurchaseOrder /></ProtectedRoute>} />
       

@@ -35,13 +35,13 @@ export default function VendorDashboard() {
         />
         <StatsCard
           title="Revenue This Month"
-          value="$18,420"
+          value="ر.س69,075"
           icon={DollarSign}
           trend={{ value: 15, isPositive: true }}
         />
         <StatsCard
           title="Average Order Value"
-          value="$428"
+          value="ر.س1,605"
           icon={TrendingUp}
           trend={{ value: 5, isPositive: true }}
         />
@@ -66,7 +66,7 @@ export default function VendorDashboard() {
                 { 
                   id: 'PO-001', 
                   date: '2 hours ago', 
-                  amount: '$2,450', 
+                  amount: 'ر.س9,188', 
                   status: 'Pending',
                   items: 15,
                   priority: 'High'
@@ -74,7 +74,7 @@ export default function VendorDashboard() {
                 { 
                   id: 'PO-002', 
                   date: '5 hours ago', 
-                  amount: '$890', 
+                  amount: 'ر.س3,338', 
                   status: 'Processing',
                   items: 8,
                   priority: 'Medium'
@@ -82,7 +82,7 @@ export default function VendorDashboard() {
                 { 
                   id: 'PO-003', 
                   date: '1 day ago', 
-                  amount: '$3,200', 
+                  amount: 'ر.س12,000', 
                   status: 'Shipped',
                   items: 12,
                   priority: 'Low'
@@ -90,7 +90,7 @@ export default function VendorDashboard() {
                 { 
                   id: 'PO-004', 
                   date: '2 days ago', 
-                  amount: '$1,750', 
+                  amount: 'ر.س6,563', 
                   status: 'Pending',
                   items: 25,
                   priority: 'High'

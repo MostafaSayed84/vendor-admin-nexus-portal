@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Filter, Package, DollarSign } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const mockProducts = [
   {
@@ -13,63 +14,63 @@ const mockProducts = [
     name: 'Wireless Bluetooth Headphones',
     category: 'Electronics',
     sku: 'WBH-001',
-    vendors: [
-      { name: 'TechCorp Solutions', price: 89.99, stock: 150 },
-      { name: 'Global Supplies Inc', price: 94.99, stock: 75 }
-    ],
-    status: 'Active',
-    totalStock: 225,
-    lowestPrice: 89.99
+      vendors: [
+        { name: 'TechCorp Solutions', price: 337.46, stock: 150 },
+        { name: 'Global Supplies Inc', price: 356.21, stock: 75 }
+      ],
+      status: 'Active',
+      totalStock: 225,
+      lowestPrice: 337.46
   },
   {
     id: 'P002',
     name: 'Ergonomic Office Chair',
     category: 'Furniture',
     sku: 'EOC-002',
-    vendors: [
-      { name: 'Innovation Labs', price: 299.99, stock: 25 },
-      { name: 'Digital Services Co', price: 279.99, stock: 40 }
-    ],
-    status: 'Active',
-    totalStock: 65,
-    lowestPrice: 279.99
+      vendors: [
+        { name: 'Innovation Labs', price: 1124.96, stock: 25 },
+        { name: 'Digital Services Co', price: 1049.96, stock: 40 }
+      ],
+      status: 'Active',
+      totalStock: 65,
+      lowestPrice: 1049.96
   },
   {
     id: 'P003',
     name: 'Stainless Steel Water Bottle',
     category: 'Home & Garden',
     sku: 'SSWB-003',
-    vendors: [
-      { name: 'Global Supplies Inc', price: 24.99, stock: 200 }
-    ],
-    status: 'Active',
-    totalStock: 200,
-    lowestPrice: 24.99
+      vendors: [
+        { name: 'Global Supplies Inc', price: 93.71, stock: 200 }
+      ],
+      status: 'Active',
+      totalStock: 200,
+      lowestPrice: 93.71
   },
   {
     id: 'P004',
     name: 'Mechanical Gaming Keyboard',
     category: 'Electronics',
     sku: 'MGK-004',
-    vendors: [
-      { name: 'TechCorp Solutions', price: 149.99, stock: 80 },
-      { name: 'Innovation Labs', price: 159.99, stock: 45 }
-    ],
-    status: 'Low Stock',
-    totalStock: 125,
-    lowestPrice: 149.99
+      vendors: [
+        { name: 'TechCorp Solutions', price: 562.46, stock: 80 },
+        { name: 'Innovation Labs', price: 599.96, stock: 45 }
+      ],
+      status: 'Low Stock',
+      totalStock: 125,
+      lowestPrice: 562.46
   },
   {
     id: 'P005',
     name: 'Organic Cotton T-Shirt',
     category: 'Clothing',
     sku: 'OCT-005',
-    vendors: [
-      { name: 'Digital Services Co', price: 29.99, stock: 0 }
-    ],
-    status: 'Out of Stock',
-    totalStock: 0,
-    lowestPrice: 29.99
+      vendors: [
+        { name: 'Digital Services Co', price: 112.46, stock: 0 }
+      ],
+      status: 'Out of Stock',
+      totalStock: 0,
+      lowestPrice: 112.46
   }
 ];
 
@@ -111,9 +112,11 @@ export default function ProductList() {
             Manage products across all vendors
           </p>
         </div>
-        <Button>
-          <Package className="h-4 w-4 mr-2" />
-          Add Product
+        <Button asChild>
+          <Link to="/admin/products/create">
+            <Package className="h-4 w-4 mr-2" />
+            Add Product
+          </Link>
         </Button>
       </div>
 
@@ -190,7 +193,7 @@ export default function ProductList() {
                         <div key={index} className="flex items-center justify-between text-sm">
                           <span className="text-foreground">{vendor.name}</span>
                           <div className="text-right">
-                            <div className="font-medium">${vendor.price}</div>
+                            <div className="font-medium">ر.س{vendor.price}</div>
                             <div className="text-muted-foreground">Stock: {vendor.stock}</div>
                           </div>
                         </div>
@@ -207,7 +210,7 @@ export default function ProductList() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center">
-                      <DollarSign className="h-4 w-4 text-muted-foreground mr-1" />
+                      <span className="text-muted-foreground mr-1">ر.س</span>
                       <span className="font-medium">{product.lowestPrice}</span>
                     </div>
                   </TableCell>

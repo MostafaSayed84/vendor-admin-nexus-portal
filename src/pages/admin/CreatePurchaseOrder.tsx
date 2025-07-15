@@ -26,20 +26,20 @@ const mockVendors = [
 
 const vendorProducts = {
   '1': [
-    { id: 'P001', name: 'Wireless Bluetooth Headphones', price: 89.99 },
-    { id: 'P004', name: 'Mechanical Gaming Keyboard', price: 149.99 }
+    { id: 'P001', name: 'Wireless Bluetooth Headphones', price: 337.46 },
+    { id: 'P004', name: 'Mechanical Gaming Keyboard', price: 562.46 }
   ],
   '2': [
-    { id: 'P001', name: 'Wireless Bluetooth Headphones', price: 94.99 },
-    { id: 'P003', name: 'Stainless Steel Water Bottle', price: 24.99 }
+    { id: 'P001', name: 'Wireless Bluetooth Headphones', price: 356.21 },
+    { id: 'P003', name: 'Stainless Steel Water Bottle', price: 93.71 }
   ],
   '3': [
-    { id: 'P002', name: 'Ergonomic Office Chair', price: 299.99 },
-    { id: 'P004', name: 'Mechanical Gaming Keyboard', price: 159.99 }
+    { id: 'P002', name: 'Ergonomic Office Chair', price: 1124.96 },
+    { id: 'P004', name: 'Mechanical Gaming Keyboard', price: 599.96 }
   ],
   '4': [
-    { id: 'P002', name: 'Ergonomic Office Chair', price: 279.99 },
-    { id: 'P005', name: 'Organic Cotton T-Shirt', price: 29.99 }
+    { id: 'P002', name: 'Ergonomic Office Chair', price: 1049.96 },
+    { id: 'P005', name: 'Organic Cotton T-Shirt', price: 112.46 }
   ]
 };
 
@@ -228,7 +228,7 @@ export default function CreatePurchaseOrder() {
                       <SelectContent>
                         {availableProducts.map(product => (
                           <SelectItem key={product.id} value={product.id}>
-                            {product.name} - ${product.price}
+                            {product.name} - ر.س{product.price}
                           </SelectItem>
                         ))}
                       </SelectContent>
@@ -252,7 +252,7 @@ export default function CreatePurchaseOrder() {
                         {orderItems.map((item) => (
                           <TableRow key={item.productId}>
                             <TableCell>{item.productName}</TableCell>
-                            <TableCell>${item.price.toFixed(2)}</TableCell>
+                            <TableCell>ر.س{item.price.toFixed(2)}</TableCell>
                             <TableCell>
                               <Input
                                 type="number"
@@ -262,7 +262,7 @@ export default function CreatePurchaseOrder() {
                                 className="w-20"
                               />
                             </TableCell>
-                            <TableCell>${item.total.toFixed(2)}</TableCell>
+                            <TableCell>ر.س{item.total.toFixed(2)}</TableCell>
                             <TableCell>
                               <Button
                                 type="button"
@@ -308,16 +308,16 @@ export default function CreatePurchaseOrder() {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Subtotal:</span>
-                    <span className="font-medium">${subtotal.toFixed(2)}</span>
+                    <span className="font-medium">ر.س{subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Tax (8%):</span>
-                    <span className="font-medium">${tax.toFixed(2)}</span>
+                    <span className="font-medium">ر.س{tax.toFixed(2)}</span>
                   </div>
                   <div className="border-t border-border pt-2">
                     <div className="flex justify-between">
                       <span className="font-semibold">Total:</span>
-                      <span className="font-bold text-lg">${total.toFixed(2)}</span>
+                      <span className="font-bold text-lg">ر.س{total.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>

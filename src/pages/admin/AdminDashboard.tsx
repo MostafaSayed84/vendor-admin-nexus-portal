@@ -34,7 +34,7 @@ export default function AdminDashboard() {
         />
         <StatsCard
           title="Total Revenue"
-          value="$142,450"
+          value="ر.س542,450"
           icon={DollarSign}
           trend={{ value: 15, isPositive: true }}
         />
@@ -95,10 +95,10 @@ export default function AdminDashboard() {
           <CardContent>
             <div className="space-y-4">
               {[
-                { id: 'PO-001', vendor: 'TechCorp Solutions', amount: '$2,450', status: 'Shipped' },
-                { id: 'PO-002', vendor: 'Global Supplies Inc', amount: '$890', status: 'Processing' },
-                { id: 'PO-003', vendor: 'Innovation Labs', amount: '$3,200', status: 'Delivered' },
-                { id: 'PO-004', vendor: 'Digital Services Co', amount: '$1,750', status: 'Pending' },
+                { id: 'PO-001', vendor: 'TechCorp Solutions', amount: 'ر.س9,188', status: 'Shipped' },
+                { id: 'PO-002', vendor: 'Global Supplies Inc', amount: 'ر.س3,338', status: 'Processing' },
+                { id: 'PO-003', vendor: 'Innovation Labs', amount: 'ر.س12,000', status: 'Delivered' },
+                { id: 'PO-004', vendor: 'Digital Services Co', amount: 'ر.س6,563', status: 'Pending' },
               ].map((order, index) => (
                 <div key={index} className="flex items-center justify-between p-3 bg-accent rounded-lg">
                   <div>
