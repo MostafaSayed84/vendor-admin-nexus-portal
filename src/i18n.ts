@@ -17,6 +17,25 @@ const resources = {
       loading: "Loading",
       dashboard: "Dashboard",
       
+      // Authentication
+      appName: "VendorPortal",
+      welcomeBack: "Welcome Back",
+      signInToAccess: "Sign in to access your portal",
+      admin: "Admin",
+      vendor: "Vendor", 
+      adminPortalAccess: "Admin Portal Access",
+      vendorPortalAccess: "Vendor Portal Access",
+      email: "Email",
+      password: "Password",
+      enterPassword: "Enter your password",
+      signIn: "Sign In",
+      signingIn: "Signing in...",
+      demoCredentials: "Demo credentials",
+      loginSuccessful: "Login successful",
+      welcomeToPortal: "Welcome to the {{role}} portal!",
+      loginFailed: "Login failed",
+      invalidCredentials: "Invalid credentials. Use 'password' as the password.",
+      
       // Navigation
       vendors: "Vendors",
       products: "Products",
@@ -96,6 +115,25 @@ const resources = {
       cancel: "إلغاء",
       loading: "تحميل",
       dashboard: "لوحة التحكم",
+      
+      // Authentication
+      appName: "بوابة الموردين",
+      welcomeBack: "مرحباً بعودتك",
+      signInToAccess: "سجل دخولك للوصول إلى البوابة",
+      admin: "مدير",
+      vendor: "مورد",
+      adminPortalAccess: "دخول بوابة المدير",
+      vendorPortalAccess: "دخول بوابة المورد",
+      email: "البريد الإلكتروني",
+      password: "كلمة المرور",
+      enterPassword: "أدخل كلمة المرور",
+      signIn: "تسجيل الدخول",
+      signingIn: "جاري تسجيل الدخول...",
+      demoCredentials: "بيانات تجريبية",
+      loginSuccessful: "تم تسجيل الدخول بنجاح",
+      welcomeToPortal: "مرحباً بك في بوابة {{role}}!",
+      loginFailed: "فشل تسجيل الدخول",
+      invalidCredentials: "بيانات غير صحيحة. استخدم 'password' ككلمة مرور.",
       
       // Navigation
       vendors: "الموردين",
